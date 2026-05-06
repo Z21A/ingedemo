@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingeniería Estratégica</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#060816;
+  color:#ffffff;
+  overflow-x:hidden;
+}
+
+.container{
+  width:min(1180px,90%);
+  margin:auto;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+section{
+  padding:100px 0;
+}
+
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:999;
+  background:rgba(6,8,22,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+nav{
+  height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:1.15rem;
+  font-weight:700;
+  letter-spacing:-1px;
+}
+
+.menu{
+  display:flex;
+  gap:34px;
+}
+
+.menu a{
+  color:#98a2b3;
+  transition:.3s;
+  font-size:.95rem;
+}
+
+.menu a:hover{
+  color:#ffffff;
+}
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:700px;
+  height:700px;
+  background:radial-gradient(circle,#2563eb22,transparent 70%);
+  top:-250px;
+  right:-200px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.image-card{
+  position:relative;
+}
+
+.image-box{
+  background:#0c1025;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:34px;
+  padding:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+}
+
+.placeholder{
+  height:620px;
+  border-radius:26px;
+  background:linear-gradient(135deg,#0f172a,#111827);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.placeholder::before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  border:2px dashed rgba(96,165,250,.25);
+}
+
+.placeholder span{
+  position:relative;
+  z-index:2;
+  color:#60a5fa;
+  font-size:1.5rem;
+  font-weight:600;
+}
+
+.floating-info{
+  position:absolute;
+  bottom:-25px;
+  left:-25px;
+  background:#111827;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;
+  padding:24px 28px;
+  box-shadow:0 25px 50px rgba(0,0,0,.4);
+}
+
+.floating-info strong{
+  display:block;
+  font-size:2rem;
+  margin-bottom:6px;
+}
+
+.floating-info span{
+  color:#94a3b8;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(37,99,235,.12);
+  border:1px solid rgba(96,165,250,.15);
+  color:#60a5fa;
+  margin-bottom:28px;
+  font-size:.92rem;
+}
+
+.hero h1{
+  font-size:clamp(3rem,7vw,6rem);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:28px;
+}
+
+.hero h1 span{
+  color:#60a5fa;
+}
+
+.hero p{
+  color:#94a3b8;
+  line-height:1.9;
+  font-size:1.05rem;
+  margin-bottom:40px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 28px;
+  border-radius:16px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.btn-primary{
+  background:#2563eb;
+  color:white;
+  box-shadow:0 20px 40px rgba(37,99,235,.25);
+}
+
+.btn-primary:hover{
+  transform:translateY(-4px);
+}
+
+.btn-secondary{
+  border:1px solid rgba(255,255,255,.08);
+  background:#0f172a;
+  color:#dbeafe;
+}
+
+.section-head{
+  text-align:center;
+  max-width:760px;
+  margin:auto;
+  margin-bottom:70px;
+}
+
+.section-head span{
+  color:#60a5fa;
+  display:block;
+  margin-bottom:16px;
+  font-weight:600;
+}
+
+.section-head h2{
+  font-size:clamp(2.2rem,5vw,4rem);
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.section-head p{
+  color:#94a3b8;
+  line-height:1.9;
+}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+
+.service-card{
+  background:#0d1328;
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:28px;
+  padding:36px;
+  transition:.3s;
+}
+
+.service-card:hover{
+  transform:translateY(-8px);
+  border-color:#2563eb;
+}
+
+.service-icon{
+  width:70px;
+  height:70px;
+  border-radius:20px;
+  background:rgba(37,99,235,.12);
+  color:#60a5fa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:24px;
+  font-weight:700;
+}
+
+.service-card h3{
+  margin-bottom:16px;
+}
+
+.service-card p{
+  color:#94a3b8;
+  line-height:1.8;
+}
+
+.stats{
+  background:#0b1020;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+}
+
+.stat-card{
+  background:#111827;
+  border-radius:24px;
+  padding:36px;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.stat-card strong{
+  display:block;
+  font-size:3rem;
+  margin-bottom:12px;
+  color:#60a5fa;
+}
+
+.stat-card span{
+  color:#94a3b8;
+}
+
+.timeline{
+  max-width:900px;
+  margin:auto;
+  position:relative;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:22px;
+  top:0;
+  width:2px;
+  height:100%;
+  background:rgba(255,255,255,.08);
+}
+
+.timeline-item{
+  position:relative;
+  padding-left:85px;
+  margin-bottom:55px;
+}
+
+.timeline-dot{
+  position:absolute;
+  left:10px;
+  top:5px;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#2563eb;
+  border:5px solid #111827;
+}
+
+.timeline-item span{
+  color:#60a5fa;
+  display:block;
+  margin-bottom:12px;
+  font-weight:600;
+}
+
+.timeline-item h3{
+  margin-bottom:12px;
+}
+
+.timeline-item p{
+  color:#94a3b8;
+  line-height:1.8;
+}
+
+.testimonials-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+}
+
+.testimonial{
+  background:#0d1328;
+  border-radius:28px;
+  padding:34px;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.testimonial p{
+  color:#cbd5e1;
+  line-height:1.9;
+  margin-bottom:24px;
+}
+
+.testimonial span{
+  color:#60a5fa;
+}
+
+.contact-box{
+  background:linear-gradient(135deg,#111827,#1e3a8a);
+  border-radius:36px;
+  padding:80px 40px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.contact-box::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,rgba(96,165,250,.15),transparent 70%);
+  top:-250px;
+  right:-150px;
+}
+
+.contact-box h2{
+  font-size:clamp(2.3rem,5vw,4.5rem);
+  letter-spacing:-3px;
+  margin-bottom:24px;
+}
+
+.contact-box p{
+  max-width:720px;
+  margin:auto;
+  color:#cbd5e1;
+  line-height:1.9;
+  margin-bottom:40px;
+}
+
+footer{
+  padding:45px 0;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+.footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.footer-links{
+  display:flex;
+  gap:20px;
+  color:#94a3b8;
+}
+
+.whatsapp{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 20px 45px rgba(37,211,102,.3);
+  transition:.3s;
+}
+
+.whatsapp:hover{
+  transform:scale(1.08);
+}
+
+.whatsapp svg{
+  width:32px;
+  fill:white;
+}
+
+@media(max-width:980px){
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .menu{
+    display:none;
+  }
+
+  .hero{
+    padding-top:130px;
+  }
+
+  .placeholder{
+    height:420px;
+  }
+
+  .floating-info{
+    position:relative;
+    left:auto;
+    bottom:auto;
+    margin-top:20px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="container">
+
+    <nav>
+
+      <div class="logo">
+        Ingeniería Estratégica
+      </div>
+
+      <div class="menu">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<section class="hero" id="inicio">
+
+  <div class="container hero-grid">
+
+    <div class="image-card">
+
+      <div class="image-box">
+
+        <div class="placeholder">
+          <span>Tu Foto</span>
+        </div>
+
+      </div>
+
+      <div class="floating-info">
+        <strong>+12 años</strong>
+        <span>Experiencia en ingeniería y gestión</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="badge">
+        Ingeniería · Optimización · Consultoría
+      </div>
+
+      <h1>
+        Soluciones técnicas con visión <span>estratégica.</span>
+      </h1>
+
+      <p>
+        Desarrollo de soluciones orientadas a eficiencia operacional, planificación de proyectos y mejora continua. Un enfoque profesional, moderno y orientado a resultados sostenibles.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#contacto" class="btn btn-primary">
+          Agendar reunión
+        </a>
+
+        <a href="#servicios" class="btn btn-secondary">
+          Ver servicios
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="servicios">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <span>SERVICIOS</span>
+
+      <h2>
+        Áreas de especialización profesional.
+      </h2>
+
+      <p>
+        Soluciones adaptadas a distintos desafíos empresariales y operacionales.
+      </p>
+
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+
+        <div class="service-icon">
+          01
+        </div>
+
+        <h3>Gestión de Proyectos</h3>
+
+        <p>
+          Coordinación y planificación estratégica orientada al cumplimiento eficiente de objetivos.
+        </p>
+
+      </div>
+
+      <div class="service-card">
+
+        <div class="service-icon">
+          02
+        </div>
+
+        <h3>Optimización de Procesos</h3>
+
+        <p>
+          Análisis operacional enfocado en productividad, eficiencia y reducción de costos.
+        </p>
+
+      </div>
+
+      <div class="service-card">
+
+        <div class="service-icon">
+          03
+        </div>
+
+        <h3>Asesoría Técnica</h3>
+
+        <p>
+          Soluciones profesionales para apoyar decisiones y potenciar resultados empresariales.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="stats">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <span>RESULTADOS</span>
+
+      <h2>
+        Experiencia respaldada por proyectos reales.
+      </h2>
+
+    </div>
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <strong>180+</strong>
+        <span>Proyectos desarrollados</span>
+      </div>
+
+      <div class="stat-card">
+        <strong>98%</strong>
+        <span>Clientes satisfechos</span>
+      </div>
+
+      <div class="stat-card">
+        <strong>24h</strong>
+        <span>Tiempo promedio de respuesta</span>
+      </div>
+
+      <div class="stat-card">
+        <strong>12+</strong>
+        <span>Años de experiencia</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="experiencia">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <span>TRAYECTORIA</span>
+
+      <h2>
+        Experiencia en distintos desafíos profesionales.
+      </h2>
+
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <span>2021 - Actualidad</span>
+
+        <h3>Consultoría Estratégica</h3>
+
+        <p>
+          Desarrollo de proyectos orientados a optimización y mejora continua.
+        </p>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <span>2017 - 2021</span>
+
+        <h3>Gestión Operacional</h3>
+
+        <p>
+          Liderazgo de equipos y coordinación de procesos estratégicos.
+        </p>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <span>2013 - 2017</span>
+
+        <h3>Ingeniería de Procesos</h3>
+
+        <p>
+          Implementación de mejoras operacionales y análisis de indicadores.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="opiniones">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <span>OPINIONES</span>
+
+      <h2>
+        Resultados que generan confianza.
+      </h2>
+
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial">
+
+        <p>
+          “Gran capacidad de análisis y excelente enfoque para resolver problemas complejos.”
+        </p>
+
+        <strong>Gerencia Operacional</strong>
+        <span>Empresa Industrial</span>
+
+      </div>
+
+      <div class="testimonial">
+
+        <p>
+          “Profesionalismo y claridad durante todo el desarrollo del proyecto.”
+        </p>
+
+        <strong>Dirección General</strong>
+        <span>Consultora Empresarial</span>
+
+      </div>
+
+      <div class="testimonial">
+
+        <p>
+          “Logramos optimizar procesos clave y mejorar considerablemente nuestros tiempos.”
+        </p>
+
+        <strong>Área Técnica</strong>
+        <span>Operaciones</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="contacto">
+
+  <div class="container">
+
+    <div class="contact-box">
+
+      <h2>
+        Conversemos sobre tu próximo proyecto.
+      </h2>
+
+      <p>
+        Disponible para asesorías, proyectos y soluciones enfocadas en eficiencia, planificación y mejora continua.
+      </p>
+
+      <a href="#" class="btn btn-primary">
+        Contactar ahora
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <div class="container footer">
+
+    <div>
+      <strong>Ingeniería Estratégica</strong>
+    </div>
+
+    <div class="footer-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">Correo</a>
+      <a href="#">WhatsApp</a>
+    </div>
+
+  </div>
+
+</footer>
+
+<a href="https://wa.me/56900000000" class="whatsapp" target="_blank">
+
+<svg viewBox="0 0 32 32">
+<path d="M19.11 17.2c-.29-.14-1.72-.85-1.99-.95-.27-.1-.47-.14-.67.15-.2.29-.77.95-.94 1.15-.17.2-.35.22-.64.07-.29-.14-1.24-.46-2.35-1.48-.87-.77-1.46-1.73-1.63-2.02-.17-.29-.02-.44.13-.58.13-.13.29-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.14-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.02-1.04 2.49 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.71.22 1.36.19 1.87.12.57-.08 1.72-.7 1.96-1.37.24-.67.24-1.24.17-1.37-.07-.12-.27-.19-.56-.34z"/>
+</svg>
+
+</a>
+
+</body>
+</html>
